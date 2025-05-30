@@ -14,7 +14,16 @@ The basic idea of this projectis to deploy serving APIs using terraform on a k8s
 - .gitignore
 - GitHub Action - https://github.com/saniya-afreen/TBI-assessment_repo/actions
 
-## iac ->
+## iac -> Infrastructure as code using terraform on K8s cluster
+
+The files under it are written for the following reason:
+
+- main.tf: 	Core Terraform configuration that sets up the Kubernetes provider, applies deployment and service templates, and creates Kubernetes resources.
+- variables.tf: Declares configurable input variables in this case the docker image for flexibility and reuse.
+- outputs.tf:	Outputs the service URL by dynamically fetching the Minikube IP and combining it with the exposed NodePort.
+- k8s_deployment.yaml.tpl:	A templated Kubernetes Deployment manifest that is rendered by Terraform using variables for dynamic configuration.
+- k8s_service.yaml.tpl:	A templated Kubernetes Service manifest (usually a NodePort) to expose the FastAPI application outside the cluster.
+
 
 ## tests -> test cases to test the APIs in serving
 
@@ -123,7 +132,7 @@ For simplicity of the task, I am using minikube dashboard to monitor the applica
 
 
 ### Dependecies 
-We have kept all out dependencies inside the requirements.txt (will already run in docker image creation):
+I have kept all out dependencies inside the requirements.txt (will already run in docker image creation):
 
 Dependencies used:
 
@@ -138,7 +147,9 @@ pillow – used for image processing.
 torch – PyTorch, for running ML models.
 
 torchvision – has some handy tools and models for computer vision stuff.
-pytest - 
-httpx -
+
+pytest – Python test framework for running tests easily.
+
+httpx – HTTP client to send requests to FastAPI during tests.
 
 These are all the packages I needed to get the backend, file uploads, and ML model working together.1.

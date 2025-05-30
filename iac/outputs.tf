@@ -3,6 +3,7 @@ output "node_port_url" {
   description = "Service URL"
 }
 
+
 data "external" "minikube_ip" {
-  program = ["bash", "-c", "minikube ip | awk '{ print \"{\\\"ip\\\":\\\"\" $1 \"\\\"}\" }'"]
+  program = ["bash", "-c", "echo '{\"ip\": \"'$(minikube ip)'\"}'"]
 }

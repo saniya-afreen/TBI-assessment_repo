@@ -103,6 +103,8 @@ curl --location 'http://127.0.0.1:8000/predict' \
     ]
 }
 
+![Model Predict](image-1.png)
+
 
 ## Monitoring
 For simplicity of the task, I am using minikube dashboard to monitor the application, a proper grafana/prometheus dashboard can be implemented to proivde more richer information, such as request counts and pod health.

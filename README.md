@@ -154,32 +154,3 @@ httpx – HTTP client to send requests to FastAPI during tests.
 
 These are all the packages I needed to get the backend, file uploads, and ML model working together.1.
 
-#### Quick Steps to Test the Project
-1. Build Docker Image
-
-docker build -t model-app-serving:latest .
- 
- 2. Deploy with Terraform
-
-
-cd iac/
-terraform init
-terraform apply 
-
-3. Deploy a Model
-
-bash
-
-curl -X POST <SERVICE_URL>/deploy \
- -H "Content-Type: application/json" \
- -d '{"model_name": "distilbert-base-uncased-finetuned-sst-2-english"}'
-
-4. Check Model Status
-
-curl -X GET <SERVICE_URL>/status/distilbert-base-uncased-finetuned-sst-2-english
-
-5. Make a Prediction
- 
-curl -X POST <SERVICE_URL>/predict \
- -H "Content-Type: application/json" \
- -d '{"model_name": "distilbert-base-uncased-finetuned-sst-2-english", "text": "This is amazing!"}'

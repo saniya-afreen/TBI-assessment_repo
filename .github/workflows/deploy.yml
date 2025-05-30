@@ -1,0 +1,62 @@
+name: CI/CD - FastAPI Model Server with Rollback
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  IMAGE_NAME: model-app-serving
+  IMAGE_TAG: latest
+  REPO: safreen1/model-app-serving 
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t $REPO:$IMAGE_TAG .
+
+    - name: Push Docker image to Docker Hub (public)
+      run: docker push $REPO:$IMAGE_TAG
+
+  terraform-deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: iac
+
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.5.0
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Save current state backup
+      run: cp terraform.tfstate terraform.tfstate.backup || echo "No state yet"
+
+    - name: Terraform Apply
+      id: apply
+      continue-on-error: true
+      run: terraform apply -auto-approve
+      env:
+        TF_VAR_image_name: ${{ env.REPO }}:${{ env.IMAGE_TAG }}
+
+    - name: Rollback on Failure
+      if: steps.apply.outcome == 'failure'
+      run: |
+        echo "Terraform apply failed. Rolling back using previous state..."
+        mv terraform.tfstate.backup terraform.tfstate
+        terraform apply -auto-approve
+      env:
+        TF_VAR_image_name: ${{ env.REPO }}:${{ env.IMAGE_TAG }}

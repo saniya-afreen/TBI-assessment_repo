@@ -1,6 +1,9 @@
 # TBI-assessment_repo
 
-Introduction
+## GitHub
+https://github.com/saniya-afreen/TBI-assessment_repo/tree/main
+
+## Introduction
 This project has 3 major sections iac, serving, tests
 The basic idea of this projectis to deploy serving APIs using terraform on a k8s Cluster. Using GithUB actions, I demonstrated CI/CD pipeline implementation. Whenever the developer pushed the code, the github action will trigger and using the terrform configuration it will deploy the whole application in one git push.
 
@@ -10,6 +13,7 @@ The basic idea of this projectis to deploy serving APIs using terraform on a k8s
 - Dockerfile
 - .gitignore
 
+- GitHub Action - https://github.com/saniya-afreen/TBI-assessment_repo/actions
 
 ## iac ->
 
@@ -44,14 +48,23 @@ terraform output node_port_url
 
 4. Test the API
 4.1. Deploy
+
+- API Details:
 > curl --location 'http://127.0.0.1:8000/deploy' \
 --header 'Content-Type: application/json' \
 --data '{"model_name": "distilbert-base-uncased-finetuned-sst-2-english"}'
 
 - Response:
+{
+    "message": "Started deploying sentence-transformers/all-MiniLM-L6-v2",
+    "status": "STARTED"
+}
 
 
 4.2. Status
+
+- API Details:
+
 curl --location --request GET 'http://127.0.0.1:8000/status/all-MiniLM-L6-v2all-MiniLM-L6-v2' \
 --header 'Content-Type: application/json' \
 --data '{"model_name": "distilbert-base-uncased-finetuned-sst-2-english"}'
@@ -69,6 +82,9 @@ curl --location --request GET 'http://127.0.0.1:8000/status/all-MiniLM-L6-v2all-
 }
 
 4.3. Test the Deployed Model - Predict
+
+- API Details:
+
 curl --location 'http://127.0.0.1:8000/predict' \
 --header 'Content-Type: application/json' \
 --data '{"model_name": "distilbert-base-uncased-finetuned-sst-2-english", "text": "This is amazing!"}'
@@ -91,6 +107,10 @@ For simplicity of the task, I am using minikube dashboard to monitor the applica
 > minikube dashboard
 
 - minikube dashboad - http://127.0.0.1:53020/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+
+- Here's an example screenshot of similar model app running on K8s
+
+![Monitoring Dashboard](image.png)
 
 
 2. We have kept all out dependencies inside the requirements.txt (will already run in docker image creation):

@@ -133,5 +133,7 @@ pillow – used for image processing.
 torch – PyTorch, for running ML models.
 
 torchvision – has some handy tools and models for computer vision stuff.
+pytest - 
+httpx -
 
 These are all the packages I needed to get the backend, file uploads, and ML model working together.1.

@@ -12,7 +12,6 @@ The basic idea of this projectis to deploy serving APIs using terraform on a k8s
 - tests
 - Dockerfile
 - .gitignore
-
 - GitHub Action - https://github.com/saniya-afreen/TBI-assessment_repo/actions
 
 ## iac ->
@@ -22,16 +21,21 @@ The basic idea of this projectis to deploy serving APIs using terraform on a k8s
 ## serving
 serving -> requirement.txt, apis to deploy and check status of the 
 APIs:
-- POST /deploy
-- GET /status
-- POST /predict
-
-DockerFile - model-app
+Signature of this API is mentioned below in the test section.
+#### POST /deploy
+This API takes model_name as input, and deploys the given HuggingFace model, also return the status of the running model
 
 
+#### GET /status
+This API gives the status of the last deployed model.
+
+#### POST /predict
+This API is to perfrom inference on the deployed model, it takes the model name and required parameters. 
+For this example, I have used distilbert-base-uncased-finetuned-sst-2-english model, that takes single sentence and returns positivity/negativity of the sentence.
 
 
-# model-app Build and start
+
+# model-app Build and test
 Deploy model using K8, terraform:
 
 Before deploying the model for setting up the environment :
@@ -47,7 +51,7 @@ Before deploying the model for setting up the environment :
 terraform output node_port_url
 
 4. Test the API
-4.1. Deploy
+#### 4.1. Deploy
 
 - API Details:
 > curl --location 'http://127.0.0.1:8000/deploy' \
@@ -61,7 +65,7 @@ terraform output node_port_url
 }
 
 
-4.2. Status
+#### 4.2. Status
 
 - API Details:
 
@@ -81,7 +85,7 @@ curl --location --request GET 'http://127.0.0.1:8000/status/all-MiniLM-L6-v2all-
     "status": "NOT_SERVING"
 }
 
-4.3. Test the Deployed Model - Predict
+#### 4.3. Test the Deployed Model - Predict
 
 - API Details:
 

@@ -117,7 +117,8 @@ For simplicity of the task, I am using minikube dashboard to monitor the applica
 ![Monitoring Dashboard](image.png)
 
 
-2. We have kept all out dependencies inside the requirements.txt (will already run in docker image creation):
+### Dependecies 
+We have kept all out dependencies inside the requirements.txt (will already run in docker image creation):
 
 Dependencies used:
 

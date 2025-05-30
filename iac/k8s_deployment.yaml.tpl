@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: model-app-serving:latest
+          image: safreen1/model-app-serving:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8000

@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm / VS Code / Jupyter configs
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# PyTorch cache (if using TorchHub or similar)
+~/.cache/torch/
+torch_cache/
+
+# Image uploads or test files
+#*.jpg
+#*.png
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Docker files
+*.tar
+*.log
+
+# Ignore compiled Python C extensions
+*.so
+
+# FastAPI auto-generated OpenAPI cache
+openapi.json
+
+# Coverage and testing
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+
+# mypy and pylint cache
+.mypy_cache/
+.pytest_cache/

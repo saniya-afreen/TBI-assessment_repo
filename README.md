@@ -24,14 +24,17 @@ APIs:
 Signature of this API is mentioned below in the test section.
 #### POST /deploy
 This API takes model_name as input, and deploys the given HuggingFace model, also return the status of the running model
+![Deploy](image-3.png)
 
 
 #### GET /status
 This API gives the status of the last deployed model.
+![Model Status](image-2.png)
 
 #### POST /predict
 This API is to perfrom inference on the deployed model, it takes the model name and required parameters. 
 For this example, I have used distilbert-base-uncased-finetuned-sst-2-english model, that takes single sentence and returns positivity/negativity of the sentence.
+![Model Predict](image-1.png)
 
 
 
@@ -103,7 +106,7 @@ curl --location 'http://127.0.0.1:8000/predict' \
     ]
 }
 
-![Model Predict](image-1.png)
+
 
 
 ## Monitoring
